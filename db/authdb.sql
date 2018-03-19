@@ -1,12 +1,12 @@
 CREATE TABLE roles (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
-    role          TEXT NOT NULL UNIQUE
+    role          VARCHAR(20) NOT NULL UNIQUE
 );
 CREATE TABLE users (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
-    username      TEXT NOT NULL UNIQUE,
-    email         TEXT NOT NULL,
-    password      TEXT NOT NULL,
+    username      VARCHAR(30) NOT NULL UNIQUE,
+    email         VARCHAR(50) NOT NULL,
+    password      VARCHAR(128) NOT NULL,
     last_modified DATETIME NOT NULL
 );
 CREATE TABLE user_roles (
