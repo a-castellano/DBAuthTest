@@ -1,5 +1,4 @@
 use utf8;
-
 package Auth::Schema::Result::User;
 
 # Created by DBIx::Class::Schema::Loader
@@ -25,13 +24,11 @@ extends 'DBIx::Class::Core';
 
 =item * L<DBIx::Class::InflateColumn::DateTime>
 
-=item * L<DBIx::Class::TimeStamp>
-
 =back
 
 =cut
 
-__PACKAGE__->load_components( "InflateColumn::DateTime", "TimeStamp" );
+__PACKAGE__->load_components("InflateColumn::DateTime");
 
 =head1 TABLE: C<users>
 
@@ -49,18 +46,21 @@ __PACKAGE__->table("users");
 
 =head2 username
 
-  data_type: 'text'
+  data_type: 'varchar'
   is_nullable: 0
+  size: 30
 
 =head2 email
 
-  data_type: 'text'
+  data_type: 'varchar'
   is_nullable: 0
+  size: 50
 
 =head2 password
 
-  data_type: 'text'
+  data_type: 'varchar'
   is_nullable: 0
+  size: 128
 
 =head2 last_modified
 
@@ -70,16 +70,16 @@ __PACKAGE__->table("users");
 =cut
 
 __PACKAGE__->add_columns(
-    "id",
-    { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
-    "username",
-    { data_type => "text", is_nullable => 0 },
-    "email",
-    { data_type => "text", is_nullable => 0 },
-    "password",
-    { data_type => "text", is_nullable => 0 },
-    "last_modified",
-    { data_type => "datetime", is_nullable => 0 },
+  "id",
+  { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
+  "username",
+  { data_type => "varchar", is_nullable => 0, size => 30 },
+  "email",
+  { data_type => "varchar", is_nullable => 0, size => 50 },
+  "password",
+  { data_type => "varchar", is_nullable => 0, size => 128 },
+  "last_modified",
+  { data_type => "datetime", is_nullable => 0 },
 );
 
 =head1 PRIMARY KEY
@@ -106,7 +106,7 @@ __PACKAGE__->set_primary_key("id");
 
 =cut
 
-__PACKAGE__->add_unique_constraint( "username_unique", ["username"] );
+__PACKAGE__->add_unique_constraint("username_unique", ["username"]);
 
 =head1 RELATIONS
 
@@ -119,10 +119,10 @@ Related object: L<Auth::Schema::Result::UserRole>
 =cut
 
 __PACKAGE__->has_many(
-    "user_roles",
-    "Auth::Schema::Result::UserRole",
-    { "foreign.user_id" => "self.id" },
-    { cascade_copy      => 0, cascade_delete => 0 },
+  "user_roles",
+  "Auth::Schema::Result::UserRole",
+  { "foreign.user_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 roles
@@ -133,10 +133,11 @@ Composing rels: L</user_roles> -> role
 
 =cut
 
-__PACKAGE__->many_to_many( "roles", "user_roles", "role" );
+__PACKAGE__->many_to_many("roles", "user_roles", "role");
 
-# Created by DBIx::Class::Schema::Loader v0.07048 @ 2018-03-19 14:13:58
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:P2hx0BmL39MYp+rAdv4kQg
+
+# Created by DBIx::Class::Schema::Loader v0.07048 @ 2018-03-19 16:08:05
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:YTzLkeN7tkfC2ax/D+UdVQ
 
 __PACKAGE__->add_columns(
     'last_modified',

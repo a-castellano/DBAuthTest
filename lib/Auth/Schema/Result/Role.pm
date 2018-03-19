@@ -24,13 +24,11 @@ extends 'DBIx::Class::Core';
 
 =item * L<DBIx::Class::InflateColumn::DateTime>
 
-=item * L<DBIx::Class::TimeStamp>
-
 =back
 
 =cut
 
-__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp");
+__PACKAGE__->load_components("InflateColumn::DateTime");
 
 =head1 TABLE: C<roles>
 
@@ -48,8 +46,9 @@ __PACKAGE__->table("roles");
 
 =head2 role
 
-  data_type: 'text'
+  data_type: 'varchar'
   is_nullable: 0
+  size: 20
 
 =cut
 
@@ -57,7 +56,7 @@ __PACKAGE__->add_columns(
   "id",
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
   "role",
-  { data_type => "text", is_nullable => 0 },
+  { data_type => "varchar", is_nullable => 0, size => 20 },
 );
 
 =head1 PRIMARY KEY
@@ -114,8 +113,8 @@ Composing rels: L</user_roles> -> user
 __PACKAGE__->many_to_many("users", "user_roles", "user");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07048 @ 2018-03-19 14:13:58
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:RbQGNx58IziO7cP/lUqwQw
+# Created by DBIx::Class::Schema::Loader v0.07048 @ 2018-03-19 16:08:05
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:QgvDXculoRrjmMLwJn/47w
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
